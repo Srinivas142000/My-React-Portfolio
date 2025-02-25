@@ -34,7 +34,7 @@ export const NavBar = () => {
             src={logo}
             alt="Logo"
             className="navbar-logo"
-            style={{ width: '400px', height: '100px' }}
+            style={{ width: '390px', height: '100px' }}
           />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav">

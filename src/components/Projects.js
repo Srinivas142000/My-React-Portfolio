@@ -13,6 +13,9 @@ import projImg1F from "../assets/img/imgconv.jpeg";
 import projImg2F from "../assets/img/arml.jpeg";
 import projImg3F from "../assets/img/traumabot.jpeg";
 import projImg4F from "../assets/img/scamshield.jpeg";
+import projImgWorldQuant from "../assets/img/worldquant.png";
+import mri from "../assets/img/medrhy.jpeg";
+import cybi from "../assets/img/codecyb.jpeg"
 import "../App.css";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import { useNavigate } from "react-router-dom";
@@ -59,6 +62,30 @@ const projects = [
     imgUrl: projImg6,
     technologies: ["Chatrooms", "WebSocket", "HTTP", "TCP/IP", "Client Server Architecture", "peer-to-peer networking", "Python"],
     additionalInformation: "The goal of this project was to perform an analysis of two popular network architectures using chatrooms. It involved comparing the performance and functionality of client-server and peer-to-peer architectures in the context of real-time communication. The project explored various aspects of networking protocols, including WebSocket and TCP/IP, and demonstrated how each architecture supports communication between users. This comparison aimed to provide insights into the strengths and weaknesses of each approach, helping to determine the most suitable architecture for different types of applications."
+  }
+];
+
+const projectsCurrent = [
+  {
+    title: "WorldQuant University Applied AI Lab",
+    description: "Deep Learning, Computer Vision, Real-World AI Projects.",
+    imgUrl: projImgWorldQuant,
+    technologies: ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
+    additionalInformation: "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
+  },
+  {
+    title: "MedRhythms App Development",
+    description: "Healthcare-focused music therapy app development.",
+    imgUrl: mri,
+    technologies: ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
+    additionalInformation: "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
+  },
+  {
+    title: "CodePath Cybersecurity",
+    description: "Comprehensive cybersecurity training and real-world projects.",
+    imgUrl: cybi,
+    technologies: ["Cybersecurity", "Ethical Hacking", "Penetration Testing", "Networking", "Linux", "Python"],
+    additionalInformation: "The CodePath cybersecurity course provides practical, hands-on training on ethical hacking, penetration testing, and building defensive security systems. Participants work on real-world projects to secure systems and prevent cyber-attacks, using tools like Kali Linux, Python, and networking protocols."
   }
 ];
 
@@ -133,6 +160,11 @@ export const Projects = () => {
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <p>I am currently dedicating my efforts to the development of these projects.</p>
+                      <Row lg = {3}>
+                        {projectsCurrent.map((project, index) => (
+                            <ProjectCard {...project} />
+                        ))}
+                      </Row>
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
                       <p>Here are the Projects I am Planning on working on sometime in the future. Contact me if you want to collaborate.</p>
