@@ -19,6 +19,7 @@ import cybi from "../assets/img/codecyb.jpeg"
 import "../App.css";
 import { ArrowRightCircle } from 'react-bootstrap-icons';
 import { useNavigate } from "react-router-dom";
+import mrProjectImage from "../assets/img/mrImage.webp";
 
 const projects = [
   {
@@ -67,26 +68,33 @@ const projects = [
 
 const projectsCurrent = [
   {
-    title: "WorldQuant University Applied AI Lab",
-    description: "Deep Learning, Computer Vision, Real-World AI Projects.",
-    imgUrl: projImgWorldQuant,
-    technologies: ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
-    additionalInformation: "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
+    "title": "WorldQuant University Applied AI Lab",
+    "description": "Deep Learning, Computer Vision, AI Applications, Python",
+    "imgUrl": projImgWorldQuant,
+    "technologies": ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
+    "additionalInformation": "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
   },
   {
-    title: "MedRhythms App Development",
-    description: "Healthcare-focused music therapy app development.",
-    imgUrl: mri,
-    technologies: ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
-    additionalInformation: "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
+    "title": "MedRhythms App Development",
+    "description": "Healthcare, Mobile App Development, Flutter, Firebase, Spotify SDK, Google Health API",
+    "imgUrl": mri,
+    "technologies": ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
+    "additionalInformation": "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
   },
   {
-    title: "CodePath Cybersecurity",
-    description: "Comprehensive cybersecurity training and real-world projects.",
-    imgUrl: cybi,
-    technologies: ["Cybersecurity", "Ethical Hacking", "Penetration Testing", "Networking", "Linux", "Python"],
-    additionalInformation: "The CodePath cybersecurity course provides practical, hands-on training on ethical hacking, penetration testing, and building defensive security systems. Participants work on real-world projects to secure systems and prevent cyber-attacks, using tools like Kali Linux, Python, and networking protocols."
-  }
+    "title": "CodePath Cybersecurity",
+    "description": "Cybersecurity, Ethical Hacking, Penetration Testing, Networking, Linux, Python",
+    "imgUrl": cybi,
+    "technologies": ["Cybersecurity", "Ethical Hacking", "Penetration Testing", "Networking", "Linux", "Python"],
+    "additionalInformation": "The CodePath cybersecurity course provides practical, hands-on training on ethical hacking, penetration testing, and building defensive security systems. Participants work on real-world projects to secure systems and prevent cyber-attacks, using tools like Kali Linux, Python, and networking protocols."
+  },
+  {
+    "title": "Meta Quest 3 MR Interior Design",
+    "description": "Unity, C#, Meta Quest 3 SDK, Mixed Reality, 3D Modeling, AR/VR, Texture Mapping",
+    "imgUrl": mrProjectImage,
+    "technologies": ["Unity", "C#", "Meta Quest 3 SDK", "Mixed Reality", "3D Modeling", "AR/VR", "Texture Mapping"],
+    "additionalInformation": "This MR project leverages the Meta Quest 3 headset to provide an immersive interior design experience. Users can create virtual walls, adjust their dimensions, and dynamically modify textures and colors to visualize interior designs in real-time. The application uses Unity and Meta's All-in-One SDK to manage spatial mapping and object interactions, ensuring a seamless and interactive user experience. Users can experiment with different styles and layouts, making it an ideal solution for architects, interior designers, and homeowners to visualize and modify their spaces before making real-world changes."
+  }  
 ];
 
 const projectsFuture = [

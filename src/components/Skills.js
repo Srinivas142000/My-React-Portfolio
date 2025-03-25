@@ -2,12 +2,10 @@ import webdev from "../assets/img/webdev.png";
 import appdev from "../assets/img/appdev.png";
 import codedev from "../assets/img/codedev.png";
 import dbdev from "../assets/img/dbdev.png";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
 import colorSharp from "../assets/img/color-sharp.png";
+import "../css/skills.css"; // Import the CSS file for scrolling styles
 
 export const Skills = () => {
-
   const skills = [
     { name: "Python", imagetype: "codedev" },
     { name: "Java", imagetype: "codedev" },
@@ -39,29 +37,10 @@ export const Skills = () => {
   ];
 
   const imgdir = {
-    "codedev": codedev,
-    "webdev": webdev,
-    "appdev": appdev,
-    "dbdev": dbdev
-  };
-
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+    codedev: codedev,
+    webdev: webdev,
+    appdev: appdev,
+    dbdev: dbdev
   };
 
   return (
@@ -72,19 +51,34 @@ export const Skills = () => {
             <div className="skill-bx wow zoomIn">
               <h2>Skills</h2>
               <p>I have honed these skills through a combination of practical project experience and comprehensive online courses.</p>
-              <Carousel responsive={responsive} infinite={true} className="owl-carousel owl-theme skill-slider">
-                {skills.map((skill, index) => (
-                  <div key={index} className="item">
-                    <img src={imgdir[skill.imagetype]} alt={skill.name} />
-                    <h5>{skill.name}</h5>
+              
+              <div className="scroll-container">
+                <div className="scroll-wrapper">
+                  <div className="scroll-content">
+                    {skills.map((skill, index) => (
+                      <div key={index} className="scroll-item">
+                        <img src={imgdir[skill.imagetype]} alt={skill.name} />
+                        <h5>{skill.name}</h5>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </Carousel>
+                  {/* Duplicate content for infinite scrolling */}
+                  <div className="scroll-content">
+                    {skills.map((skill, index) => (
+                      <div key={`duplicate-${index}`} className="scroll-item">
+                        <img src={imgdir[skill.imagetype]} alt={skill.name} />
+                        <h5>{skill.name}</h5>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
       </div>
-      <img className="background-image-left" src={colorSharp} alt="Image" />
+      <img className="background-image-left" src={colorSharp} alt="Background" />
     </section>
   );
-}
+};
