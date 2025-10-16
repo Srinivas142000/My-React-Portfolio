@@ -14,6 +14,9 @@ import projImg2F from "../assets/img/arml.jpeg";
 import projImg3F from "../assets/img/traumabot.jpeg";
 import projImg4F from "../assets/img/scamshield.jpeg";
 import projImgWorldQuant from "../assets/img/worldquant.png";
+import paper1 from "../assets/img/paper1.png";
+import paper2 from "../assets/img/paper2.png";
+import dataviz from  "../assets/img/dataviz.png";
 import mri from "../assets/img/medrhy.jpeg";
 import cybi from "../assets/img/codecyb.jpeg"
 import "../App.css";
@@ -22,6 +25,13 @@ import { useNavigate } from "react-router-dom";
 import mrProjectImage from "../assets/img/mrImage.webp";
 
 const projects = [
+    {
+    "title": "MedRhythms App Development",
+    "description": "Healthcare, Mobile App Development, Flutter, Firebase, Spotify SDK, Google Health API",
+    "imgUrl": mri,
+    "technologies": ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
+    "additionalInformation": "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
+  },
   {
     title: "SpiderWeb, Events and Communities",
     description: "SpringBoot, React, PostgreSQL",
@@ -63,23 +73,6 @@ const projects = [
     imgUrl: projImg6,
     technologies: ["Chatrooms", "WebSocket", "HTTP", "TCP/IP", "Client Server Architecture", "peer-to-peer networking", "Python"],
     additionalInformation: "The goal of this project was to perform an analysis of two popular network architectures using chatrooms. It involved comparing the performance and functionality of client-server and peer-to-peer architectures in the context of real-time communication. The project explored various aspects of networking protocols, including WebSocket and TCP/IP, and demonstrated how each architecture supports communication between users. This comparison aimed to provide insights into the strengths and weaknesses of each approach, helping to determine the most suitable architecture for different types of applications."
-  }
-];
-
-const projectsCurrent = [
-  {
-    "title": "WorldQuant University Applied AI Lab",
-    "description": "Deep Learning, Computer Vision, AI Applications, Python",
-    "imgUrl": projImgWorldQuant,
-    "technologies": ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
-    "additionalInformation": "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
-  },
-  {
-    "title": "MedRhythms App Development",
-    "description": "Healthcare, Mobile App Development, Flutter, Firebase, Spotify SDK, Google Health API",
-    "imgUrl": mri,
-    "technologies": ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
-    "additionalInformation": "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
   },
   {
     "title": "CodePath Cybersecurity",
@@ -94,7 +87,39 @@ const projectsCurrent = [
     "imgUrl": mrProjectImage,
     "technologies": ["Unity", "C#", "Meta Quest 3 SDK", "Mixed Reality", "3D Modeling", "AR/VR", "Texture Mapping"],
     "additionalInformation": "This MR project leverages the Meta Quest 3 headset to provide an immersive interior design experience. Users can create virtual walls, adjust their dimensions, and dynamically modify textures and colors to visualize interior designs in real-time. The application uses Unity and Meta's All-in-One SDK to manage spatial mapping and object interactions, ensuring a seamless and interactive user experience. Users can experiment with different styles and layouts, making it an ideal solution for architects, interior designers, and homeowners to visualize and modify their spaces before making real-world changes."
-  }  
+  } 
+];
+
+const projectsCurrent = [
+  {
+    "title": "WorldQuant University Applied AI Lab",
+    "description": "Deep Learning, Computer Vision, AI Applications, Python",
+    "imgUrl": projImgWorldQuant,
+    "technologies": ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
+    "additionalInformation": "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
+  },
+  {
+    "title": "Learning Data-Driven Reflectance Priors for Intrinsic Image Decomposition",
+    "description": "Computer Vision, Machine Learning, Image Processing, Python, Caffe, Deep Learning, Energy Minimization",
+    "imgUrl": paper2,
+    "technologies": ["Python", "Caffe", "Machine Learning", "Computer Vision", "Deep Learning", "Energy Minimization", "Image Processing"],
+    "additionalInformation": "This research project tackles the fundamental computer vision problem of intrinsic image decomposition - separating an image into its reflectance (surface color) and shading (lighting) components. The approach uses a two-stage learning framework that first trains a model on large-scale human annotations to predict relative reflectance ordering between image patches (brighter, darker, or same), creating a data-driven reflectance prior. This learned prior is then integrated into energy minimization frameworks for decomposition. The method demonstrates superior performance compared to state-of-the-art approaches, particularly excelling in challenging lighting conditions. This work has applications in computational photography, image relighting, material recognition, and 3D reconstruction, making it valuable for graphics designers, photographers, and computer vision researchers working with scene understanding and image manipulation."
+},
+{
+    "title": "Fast Single Image Haze Removal Using Color Attenuation Prior",
+    "description": "Computer Vision, Image Processing, Atmospheric Scattering Model, Machine Learning, Depth Estimation, Python, C++",
+    "imgUrl": paper1,
+    "technologies": ["Python", "C++", "Computer Vision", "Machine Learning", "Supervised Learning", "Image Processing", "Depth Estimation"],
+    "additionalInformation": "This research addresses the challenging problem of removing haze and fog from single images through a novel color attenuation prior. The algorithm creates a linear model to estimate scene depth from hazy images by exploiting the observation that haze affects different color channels differently based on distance. Using supervised learning to optimize model parameters, the system accurately recovers depth information, which then enables precise estimation of atmospheric transmission and restoration of clear scene radiance through the atmospheric scattering model. The method significantly outperforms existing state-of-the-art dehazing algorithms in both computational efficiency and visual quality. This technology has practical applications in autonomous driving, surveillance systems, outdoor photography enhancement, and any computer vision system operating in adverse weather conditions where image clarity is compromised by atmospheric particles."
+},
+{
+    "title": "Washington State Electric Vehicle Population Data Analysis",
+    "description": "Data Analysis, Python, Pandas, Visualization, SQL, Geospatial Analysis, Statistical Modeling, Machine Learning",
+    "imgUrl": dataviz,
+    "technologies": ["Python", "Pandas", "SQL", "Data Visualization", "Matplotlib", "Seaborn", "Geospatial Analysis", "Statistical Analysis"],
+    "additionalInformation": "This data analytics project utilizes the comprehensive Washington State Department of Licensing electric vehicle registration dataset, which tracks all Battery Electric Vehicles (BEVs) and Plug-in Hybrid Electric Vehicles (PHEVs) currently registered in Washington State. The dataset integrates information from the National Highway Traffic Safety Administration (NHTSA) and Environmental Protection Agency (EPA) fuel efficiency ratings with DOL titling and registration data. The analysis explores geographic distribution patterns across counties and ZIP codes, vehicle make and model preferences, temporal adoption trends, and electric range capabilities. Key insights reveal that over half of registered EVs are concentrated in King County, with Tesla Model 3 and Nissan LEAF representing nearly 50% of all electric vehicles. This project demonstrates advanced data cleaning, exploratory data analysis, geospatial visualization, and predictive modeling techniques to understand EV adoption patterns, inform policy decisions, support infrastructure planning for charging stations, and forecast future electric vehicle market trends. The findings are valuable for urban planners, environmental policy makers, automotive industry analysts, and sustainability researchers tracking the transition to clean transportation."
+}
+   
 ];
 
 const projectsFuture = [
