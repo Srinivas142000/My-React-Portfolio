@@ -1,99 +1,62 @@
 import { useState, useEffect } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import logo from '../assets/img/download.svg';
-import navIcon1 from '../assets/img/nav-icon1.svg';
-import navIcon2 from '../assets/img/github.png';
-import { HashLink } from 'react-router-hash-link';
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import { Github, Linkedin } from "react-bootstrap-icons";
+import { links } from "../data/profile";
 
 export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState('home');
   const [scrolled, setScrolled] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const onScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const onUpdateActiveLink = (value) => {
-    setActiveLink(value);
-  };
+  // Close the mobile menu whenever the route changes
+  useEffect(() => setExpanded(false), [pathname]);
+
+  const close = () => setExpanded(false);
+  const solid = scrolled || expanded || pathname !== "/";
 
   return (
-    <Navbar expand="md" className={scrolled ? "scrolled" : ""} sticky="top">
+    <Navbar
+      expand="md"
+      expanded={expanded}
+      onToggle={setExpanded}
+      className={`site-nav ${solid ? "is-solid" : ""}`}
+      variant="dark"
+    >
       <Container>
-        <Navbar.Brand href="/">
-          <img
-            src={logo}
-            alt="Logo"
-            className="navbar-logo"
-            style={{ width: '390px', height: '100px' }}
-          />
+        <Navbar.Brand as={Link} to="/" className="brand" onClick={close}>
+          <span className="brand-mark">YK</span>
+          Yoga Kasireddy
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav">
-          <span className="navbar-toggler-icon"></span>
-        </Navbar.Toggle>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Link
-              href="#home"
-              className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('home')}
-            >
-              Home
-            </Nav.Link>
-            <Nav.Link
-              href="#skills"
-              className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('skills')}
-            >
-              Skills
-            </Nav.Link>
-            <Nav.Link
-              href="#projects"
-              className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('projects')}
-            >
-              Projects
-            </Nav.Link>
-            <Nav.Link
-              href="https://drive.google.com/file/d/17Wcf02A2cashal6m9t_7lvViUZo1cArK/view?usp=drive_link"
-              className={activeLink === 'resume' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('resume')}
-            >
+        <Navbar.Toggle aria-controls="main-nav" />
+        <Navbar.Collapse id="main-nav">
+          <Nav className="ms-auto align-items-md-center">
+            <Nav.Link as={NavLink} to="/me" onClick={close}>About</Nav.Link>
+            <Nav.Link as={HashLink} smooth to="/#skills" onClick={close}>Skills</Nav.Link>
+            <Nav.Link as={HashLink} smooth to="/#projects" onClick={close}>Projects</Nav.Link>
+            <Nav.Link href={links.resume} target="_blank" rel="noopener noreferrer" onClick={close}>
               Resume
             </Nav.Link>
           </Nav>
-          <span className="navbar-text">
-            <div className="social-icon">
-              <a
-                href="https://www.linkedin.com/in/yoga-srinivas-reddy-kasireddy-38b8151a0/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={navIcon1} alt="LinkedIn" />
-              </a>
-              <a
-                href="https://github.com/Srinivas142000"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={navIcon2} alt="GitHub" />
-              </a>
-            </div>
-            <HashLink to="#connect">
-              <button className="vvd">
-                <span>Let's Connect</span>
-              </button>
+          <div className="nav-actions">
+            <a className="icon-button" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <Linkedin size={16} />
+            </a>
+            <a className="icon-button" href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <Github size={16} />
+            </a>
+            <HashLink smooth to="/#connect" className="button button--primary button--sm" onClick={close}>
+              Let's connect
             </HashLink>
-          </span>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

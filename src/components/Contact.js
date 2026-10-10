@@ -1,142 +1,98 @@
 import { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import contactImg from "../assets/img/visitingcard.png";
-import "animate.css";
-import TrackVisibility from "react-on-screen";
+import { Check2, Clipboard, Envelope, FileEarmarkText, Github, Linkedin } from "react-bootstrap-icons";
+import { Reveal } from "./Reveal";
+import { links } from "../data/profile";
+
+const initialForm = { name: "", email: "", message: "" };
 
 export const Contact = () => {
-  const formInitialDetails = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    message: "",
-  };
-
-  const [formDetails, setFormDetails] = useState(formInitialDetails);
+  const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("");
+  const [copied, setCopied] = useState(false);
 
-  const onFormUpdate = (category, value) => {
-    setFormDetails({
-      ...formDetails,
-      [category]: value,
-    });
+  const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(links.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${links.email}`;
+    }
   };
 
+  // No backend: the form pre-fills an email in the visitor's mail app.
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Constructing the mailto link
-    const mailtoLink = `mailto:kasireddy.y@northeastern.edu?subject=Message%20from%20${encodeURIComponent(
-      formDetails.firstName + " " + formDetails.lastName
-    )}&body=${encodeURIComponent(
-      `Name: ${formDetails.firstName} ${formDetails.lastName}\nEmail: ${formDetails.email}\nPhone: ${formDetails.phone}\n\nMessage:\n${formDetails.message}`
-    )}`;
-
-    // Open the mailto link
-    window.location.href = mailtoLink;
-
-    // Reset the form after submission
-    setFormDetails(formInitialDetails);
-    setStatus("Email client opened successfully.");
+    const subject = encodeURIComponent(`Portfolio message from ${form.name}`);
+    const body = encodeURIComponent(`${form.message}\n\n— ${form.name} (${form.email})`);
+    window.location.href = `mailto:${links.email}?subject=${subject}&body=${body}`;
+    setForm(initialForm);
+    setStatus("Your email app should now be open with the message ready to send.");
   };
 
   return (
-    <section className="contact" id="connect">
+    <section className="section" id="connect">
       <Container>
-        <Row className="align-items-center">
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <img
-                  className={isVisible ? "animate__animated animate__zoomIn" : ""}
-                  src={contactImg}
-                  alt="Contact Us"
-                />
-              )}
-            </TrackVisibility>
-          </Col>
-          <Col size={12} md={6}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div
-                  className={
-                    isVisible ? "animate__animated animate__fadeIn" : ""
-                  }
-                >
-                  <h2>Get In Touch</h2>
-                  <form onSubmit={handleSubmit}>
-                    <Row>
-                      <Col size={12} sm={6} className="px-1">
-                        <input
-                          type="text"
-                          value={formDetails.firstName}
-                          placeholder="First Name"
-                          onChange={(e) =>
-                            onFormUpdate("firstName", e.target.value)
-                          }
-                          required
-                        />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input
-                          type="text"
-                          value={formDetails.lastName}
-                          placeholder="Last Name"
-                          onChange={(e) =>
-                            onFormUpdate("lastName", e.target.value)
-                          }
-                          required
-                        />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input
-                          type="email"
-                          value={formDetails.email}
-                          placeholder="Email Address"
-                          onChange={(e) =>
-                            onFormUpdate("email", e.target.value)
-                          }
-                          required
-                        />
-                      </Col>
-                      <Col size={12} sm={6} className="px-1">
-                        <input
-                          type="tel"
-                          value={formDetails.phone}
-                          placeholder="Phone No."
-                          onChange={(e) =>
-                            onFormUpdate("phone", e.target.value)
-                          }
-                          required
-                        />
-                      </Col>
-                      <Col size={12} className="px-1">
-                        <textarea
-                          rows="6"
-                          value={formDetails.message}
-                          placeholder="Message"
-                          onChange={(e) =>
-                            onFormUpdate("message", e.target.value)
-                          }
-                          required
-                        ></textarea>
-                        <button type="submit">
-                          <span>Send</span>
-                        </button>
-                      </Col>
-                      {status && (
-                        <Col>
-                          <p className="success">{status}</p>
-                        </Col>
-                      )}
-                    </Row>
-                  </form>
+        <Reveal className="contact-card">
+          <Row>
+            <Col lg={5}>
+              <span className="eyebrow">Contact</span>
+              <h2>Let's build something together</h2>
+              <p className="lead-text">
+                Open to software engineering roles, research collaborations, and interesting side
+                projects. The fastest way to reach me is email.
+              </p>
+              <ul className="contact-links">
+                <li>
+                  <Envelope size={18} />
+                  <a href={`mailto:${links.email}`}>{links.email}</a>
+                  <button type="button" className="copy-btn" onClick={copyEmail} aria-label="Copy email address">
+                    {copied ? <Check2 size={16} /> : <Clipboard size={15} />}
+                  </button>
+                </li>
+                <li>
+                  <Linkedin size={18} />
+                  <a href={links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                </li>
+                <li>
+                  <Github size={18} />
+                  <a href={links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                </li>
+                <li>
+                  <FileEarmarkText size={18} />
+                  <a href={links.resume} target="_blank" rel="noopener noreferrer">Resume</a>
+                </li>
+              </ul>
+            </Col>
+            <Col lg={{ span: 6, offset: 1 }}>
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div>
+                    <label htmlFor="contact-name">Name</label>
+                    <input id="contact-name" type="text" value={form.name} onChange={update("name")} autoComplete="name" required />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email">Email</label>
+                    <input id="contact-email" type="email" value={form.email} onChange={update("email")} autoComplete="email" required />
+                  </div>
                 </div>
-              )}
-            </TrackVisibility>
-          </Col>
-        </Row>
+                <div>
+                  <label htmlFor="contact-message">Message</label>
+                  <textarea id="contact-message" rows="5" value={form.message} onChange={update("message")} required />
+                </div>
+                <div>
+                  <button type="submit" className="button button--primary">
+                    Send message <Envelope size={15} />
+                  </button>
+                </div>
+                {status && <p className="form-status" role="status">{status}</p>}
+              </form>
+            </Col>
+          </Row>
+        </Reveal>
       </Container>
     </section>
   );

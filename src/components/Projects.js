@@ -1,275 +1,68 @@
-import { Container, Row, Col, Tab, Nav } from "react-bootstrap";
+import { useState } from "react";
+import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
+import { ArrowRight } from "react-bootstrap-icons";
+import { Reveal } from "./Reveal";
 import { ProjectCard } from "./ProjectCard";
-import colorSharp2 from "../assets/img/color-sharp2.png";
-import 'animate.css';
-import TrackVisibility from 'react-on-screen';
-import projImg1 from "../assets/img/projspweb.jpg";
-import projImg2 from "../assets/img/survivor.jpeg";
-import projImg3 from "../assets/img/vtotxt.jpeg";
-import projImg4 from "../assets/img/AR.jpeg";
-import projImg5 from "../assets/img/ddrow.jpeg";
-import projImg6 from "../assets/img/compnetw.jpeg";
-import projImg1F from "../assets/img/imgconv.jpeg";
-import projImg2F from "../assets/img/arml.jpeg";
-import projImg3F from "../assets/img/traumabot.jpeg";
-import projImg4F from "../assets/img/scamshield.jpeg";
-import projImgWorldQuant from "../assets/img/worldquant.png";
-import paper1 from "../assets/img/paper1.png";
-import paper2 from "../assets/img/paper2.png";
-import dataviz from  "../assets/img/dataviz.png";
-import mri from "../assets/img/medrhy.jpeg";
-import cybi from "../assets/img/codecyb.jpeg"
-import "../App.css";
-import { ArrowRightCircle } from 'react-bootstrap-icons';
-import { useNavigate } from "react-router-dom";
-import mrProjectImage from "../assets/img/mrImage.webp";
+import { ProjectModal } from "./ProjectModal";
+import { projects } from "../data/projects";
 
-const projects = [
-    {
-    "title": "MedRhythms App Development",
-    "description": "Healthcare, Mobile App Development, Flutter, Firebase, Spotify SDK, Google Health API",
-    "imgUrl": mri,
-    "technologies": ["Healthcare", "Mobile App Development", "Flutter", "Firebase", "Spotify SDK", "Google Health API"],
-    "additionalInformation": "MedRhythms app development involves building a mobile app that integrates music therapy for patients with neurological disorders. The app leverages AI and music to track patient progress, with data syncing and storage on Firebase for healthcare application."
-  },
-  {
-    title: "SpiderWeb, Events and Communities",
-    description: "SpringBoot, React, PostgreSQL",
-    imgUrl: projImg1,
-    technologies: ["SpringBoot", "React", "PostgreSQL"],
-    additionalInformation: "SpiderWeb is a dynamic social networking platform designed to foster student communities, events, and encourage active participation. With a robust backend powered by Spring Boot, a responsive frontend built with React, and a reliable PostgreSQL database, it provides an interactive space for students to connect, collaborate, and engage. This platform is designed to resemble modern project management boards like JIRA and Rally, enabling seamless collaboration and community building."
-  },
-  {
-    title: "Survivor, the Game",
-    description: "Java, MVC framework.",
-    imgUrl: projImg2,
-    technologies: ["Java", "MVC framework"],
-    additionalInformation: "Survivor, the Game is a text-based adventure game, developed using Java, and designed with an MVC (Model-View-Controller) architecture to ensure clean separation of logic and user interface. In this game, players embark on an interactive, story-driven journey where their choices influence the outcome. A custom parser was created to handle dynamic input and control the flow of the narrative. Set in a console-based environment, the game challenges players with a series of decisions that shape their survival story, combining engaging storytelling with strategic thinking."
-  },
-  {
-    title: "Voice-Based Accessibility Assistance: Voice-to-Text Form Interaction",
-    description: "Python, Vosk API, MongoDB, RESTful APIs.",
-    imgUrl: projImg3,
-    technologies: ["Python", "Vosk API", "MongoDB", "RESTful APIs"],
-    additionalInformation: "The Voice-Based Accessibility Assistance system was designed to improve accessibility by enabling users to interact with online forms using voice commands. Leveraging Python and the Vosk API for reliable voice-to-text conversion, the system allows the computer to read questions aloud and accept spoken responses, making the process more intuitive for individuals with disabilities. Users can also clarify or modify their responses verbally, ensuring accuracy and ease of use. After collecting the voice input, the system formats the data and stores it in a MongoDB database before sending it as a POST request to the relevant server for further processing. This solution streamlines form completion, providing greater independence and accessibility for users with varying needs."
-  },
-  {
-    title: "Network Element Navigation using ArcGIS and AR",
-    description: "Xamarin, ARKit, ArcGIS, Blender, iOS SDK.",
-    imgUrl: projImg4,
-    technologies: ["Xamarin", "ARKit", "ArcGIS", "Blender", "iOS SDK"],
-    additionalInformation: "This application combines ArcGIS mapping technology with augmented reality (AR) to provide an immersive, real-time experience for network element navigation. Using Xamarin as the development platform, I integrated ARKit on an iPhone 6s to enable interactive AR features. To enhance the user experience, I created custom 3D models in Blender, which were seamlessly integrated into the app. The application leverages ArcGIS APIs for precise geospatial data visualization, making it easier to navigate and interact with network elements in a fully augmented environment."
-  },
-  {
-    title: "Driver Drowsiness Detection using CNN Model",
-    description: "Python, TensorFlow, OpenCV, VGG16 CNN model.",
-    imgUrl: projImg5,
-    technologies: ["Python", "TensorFlow", "OpenCV", "VGG16 CNN model"],
-    additionalInformation: "Driver Drowsiness Detection using CNN Model is a real-time system developed to monitor driver alertness using computer vision and deep learning. I leveraged the VGG16 convolutional neural network (CNN) model to analyze raw video recordings (nearly 4 hours long), preprocessing the footage by scrubbing and extracting key features such as eye and mouth status at specific time intervals. Using Python-based algorithms, I built a model that continuously tracks the driver’s state, triggering an alarm if the eyes remain closed for more than 2 seconds or if the driver yawns repeatedly within a short time frame. This system aimed to enhance road safety by detecting signs of drowsiness and alerting the driver to prevent accidents."
-  },
-  {
-    title: "A Comparison between Client-Server Architecture and Peer-to-Peer Architectures using Chatrooms",
-    description: "Chatrooms, WebSocket, HTTP, TCP/IP, peer-to-peer networking. Python",
-    imgUrl: projImg6,
-    technologies: ["Chatrooms", "WebSocket", "HTTP", "TCP/IP", "Client Server Architecture", "peer-to-peer networking", "Python"],
-    additionalInformation: "The goal of this project was to perform an analysis of two popular network architectures using chatrooms. It involved comparing the performance and functionality of client-server and peer-to-peer architectures in the context of real-time communication. The project explored various aspects of networking protocols, including WebSocket and TCP/IP, and demonstrated how each architecture supports communication between users. This comparison aimed to provide insights into the strengths and weaknesses of each approach, helping to determine the most suitable architecture for different types of applications."
-  },
-  {
-    "title": "CodePath Cybersecurity",
-    "description": "Cybersecurity, Ethical Hacking, Penetration Testing, Networking, Linux, Python",
-    "imgUrl": cybi,
-    "technologies": ["Cybersecurity", "Ethical Hacking", "Penetration Testing", "Networking", "Linux", "Python"],
-    "additionalInformation": "The CodePath cybersecurity course provides practical, hands-on training on ethical hacking, penetration testing, and building defensive security systems. Participants work on real-world projects to secure systems and prevent cyber-attacks, using tools like Kali Linux, Python, and networking protocols."
-  },
-  {
-    "title": "Meta Quest 3 MR Interior Design",
-    "description": "Unity, C#, Meta Quest 3 SDK, Mixed Reality, 3D Modeling, AR/VR, Texture Mapping",
-    "imgUrl": mrProjectImage,
-    "technologies": ["Unity", "C#", "Meta Quest 3 SDK", "Mixed Reality", "3D Modeling", "AR/VR", "Texture Mapping"],
-    "additionalInformation": "This MR project leverages the Meta Quest 3 headset to provide an immersive interior design experience. Users can create virtual walls, adjust their dimensions, and dynamically modify textures and colors to visualize interior designs in real-time. The application uses Unity and Meta's All-in-One SDK to manage spatial mapping and object interactions, ensuring a seamless and interactive user experience. Users can experiment with different styles and layouts, making it an ideal solution for architects, interior designers, and homeowners to visualize and modify their spaces before making real-world changes."
-  } 
+const TABS = [
+  { key: "featured", label: "Featured", filter: (p) => p.featured },
+  { key: "in-progress", label: "In progress", filter: (p) => p.status === "in-progress" },
 ];
 
-const projectsCurrent = [
-  {
-    "title": "WorldQuant University Applied AI Lab",
-    "description": "Deep Learning, Computer Vision, AI Applications, Python",
-    "imgUrl": projImgWorldQuant,
-    "technologies": ["Deep Learning", "Computer Vision", "AI Applications", "Python"],
-    "additionalInformation": "WorldQuant University's Applied AI Lab is a self-paced program focusing on practical applications of deep learning, using computer vision as a framework. Through six real-world projects, participants learn key AI techniques and how to apply them in real-world scenarios."
-  },
-  {
-    "title": "Learning Data-Driven Reflectance Priors for Intrinsic Image Decomposition",
-    "description": "Computer Vision, Machine Learning, Image Processing, Python, Caffe, Deep Learning, Energy Minimization",
-    "imgUrl": paper2,
-    "technologies": ["Python", "Caffe", "Machine Learning", "Computer Vision", "Deep Learning", "Energy Minimization", "Image Processing"],
-    "additionalInformation": "This research project tackles the fundamental computer vision problem of intrinsic image decomposition - separating an image into its reflectance (surface color) and shading (lighting) components. The approach uses a two-stage learning framework that first trains a model on large-scale human annotations to predict relative reflectance ordering between image patches (brighter, darker, or same), creating a data-driven reflectance prior. This learned prior is then integrated into energy minimization frameworks for decomposition. The method demonstrates superior performance compared to state-of-the-art approaches, particularly excelling in challenging lighting conditions. This work has applications in computational photography, image relighting, material recognition, and 3D reconstruction, making it valuable for graphics designers, photographers, and computer vision researchers working with scene understanding and image manipulation."
-},
-{
-    "title": "Fast Single Image Haze Removal Using Color Attenuation Prior",
-    "description": "Computer Vision, Image Processing, Atmospheric Scattering Model, Machine Learning, Depth Estimation, Python, C++",
-    "imgUrl": paper1,
-    "technologies": ["Python", "C++", "Computer Vision", "Machine Learning", "Supervised Learning", "Image Processing", "Depth Estimation"],
-    "additionalInformation": "This research addresses the challenging problem of removing haze and fog from single images through a novel color attenuation prior. The algorithm creates a linear model to estimate scene depth from hazy images by exploiting the observation that haze affects different color channels differently based on distance. Using supervised learning to optimize model parameters, the system accurately recovers depth information, which then enables precise estimation of atmospheric transmission and restoration of clear scene radiance through the atmospheric scattering model. The method significantly outperforms existing state-of-the-art dehazing algorithms in both computational efficiency and visual quality. This technology has practical applications in autonomous driving, surveillance systems, outdoor photography enhancement, and any computer vision system operating in adverse weather conditions where image clarity is compromised by atmospheric particles."
-},
-{
-    "title": "Washington State Electric Vehicle Population Data Analysis",
-    "description": "Data Analysis, Python, Pandas, Visualization, SQL, Geospatial Analysis, Statistical Modeling, Machine Learning",
-    "imgUrl": dataviz,
-    "technologies": ["Python", "Pandas", "SQL", "Data Visualization", "Matplotlib", "Seaborn", "Geospatial Analysis", "Statistical Analysis"],
-    "additionalInformation": "This data analytics project utilizes the comprehensive Washington State Department of Licensing electric vehicle registration dataset, which tracks all Battery Electric Vehicles (BEVs) and Plug-in Hybrid Electric Vehicles (PHEVs) currently registered in Washington State. The dataset integrates information from the National Highway Traffic Safety Administration (NHTSA) and Environmental Protection Agency (EPA) fuel efficiency ratings with DOL titling and registration data. The analysis explores geographic distribution patterns across counties and ZIP codes, vehicle make and model preferences, temporal adoption trends, and electric range capabilities. Key insights reveal that over half of registered EVs are concentrated in King County, with Tesla Model 3 and Nissan LEAF representing nearly 50% of all electric vehicles. This project demonstrates advanced data cleaning, exploratory data analysis, geospatial visualization, and predictive modeling techniques to understand EV adoption patterns, inform policy decisions, support infrastructure planning for charging stations, and forecast future electric vehicle market trends. The findings are valuable for urban planners, environmental policy makers, automotive industry analysts, and sustainability researchers tracking the transition to clean transportation."
-}
-   
-];
-
-const projectsFuture = [
-  {
-    title: "Image Conv3D",
-    description: "ARKit, 3D Modeling, Unity, Computer Vision.",
-    imgUrl: projImg1F,
-    technologies: ["ARKit", "3D Modeling", "Unity", "Computer Vision"],
-    additionalInformation: "Image Conv3D will explore the conversion of 2D images into 3D objects using computer vision and machine learning techniques. By utilizing ARKit for augmented reality capabilities, Unity for 3D modeling, and computer vision algorithms, this project aims to create real-time, interactive 3D models from static images. The combination of these technologies will enable immersive visualizations that can be applied in industries such as gaming, education, and virtual reality."
-  },
-  {
-    title: "Real Time Detection of Object and Conversion to 3D Object",
-    description: "TensorFlow, OpenCV, 3D Modeling, Python.",
-    imgUrl: projImg2F,
-    technologies: ["TensorFlow", "OpenCV", "3D Modeling", "Python"],
-    additionalInformation: "This project will focus on real-time object detection and its conversion into 3D models using TensorFlow and OpenCV. By leveraging deep learning techniques for object recognition and Python-based computer vision tools, the system will be designed to capture and process objects in real time, converting them into 3D representations. This technology will have applications in fields such as robotics, interactive environments, and product design, offering a new way to engage with physical objects digitally."
-  },
-  {
-    title: "Trauma Bot",
-    description: "GPT-3, NLP, Python, Flask.",
-    imgUrl: projImg3F,
-    technologies: ["GPT-3", "NLP", "Python", "Flask"],
-    additionalInformation: "Trauma Bot will be an AI-driven chatbot designed to provide immediate support and guidance for individuals experiencing trauma or emotional distress. By utilizing GPT-3, a state-of-the-art natural language processing model, and Flask for backend development, this bot will be capable of understanding user queries and providing context-sensitive, empathetic responses. The goal of this project will be to help people navigate difficult moments by offering timely information and emotional support, potentially integrating with mental health platforms or telemedicine applications."
-  },
-  {
-    title: "Scam Shield",
-    description: "React Native, Firebase, Mobile App Development, JavaScript.",
-    imgUrl: projImg4F,
-    technologies: ["React Native", "Firebase", "Mobile App Development", "JavaScript"],
-    additionalInformation: "Scam Shield will be a mobile application designed to help users identify and avoid potential scams, phishing attacks, and fraudulent activities. Developed using React Native for cross-platform support and Firebase for real-time data synchronization, the app will analyze incoming messages, calls, and online activity to detect suspicious patterns. By leveraging JavaScript and cloud-based tools, Scam Shield will provide users with proactive protection and peace of mind, preventing them from falling victim to online scams and fraud."
-  }
-];
+const planned = projects.filter((p) => p.status === "planned");
 
 export const Projects = () => {
-  const navigate = useNavigate();
-
-  const handleButtonClick = () => {
-    navigate("/more");
-  }
+  const [tab, setTab] = useState(TABS[0].key);
+  const [selected, setSelected] = useState(null);
+  const visible = projects.filter(TABS.find((t) => t.key === tab).filter);
 
   return (
-    <section className="project" id="projects">
+    <section className="section" id="projects">
       <Container>
-        <Row>
-          <Col size={12}>
-            <TrackVisibility>
-              {({ isVisible }) => (
-                <div className={isVisible ? "animate__animated animate__fadeIn" : ""}>
-                <div className="projects-header">
-                  <h2>Projects</h2>
-                </div>
-                <Tab.Container id="projects-tabs" defaultActiveKey="first">
-                  <Nav variant="pills" className="nav-pills mb-5 justify-content-center align-items-center" id="pills-tab">
-                    <Nav.Item>
-                      <Nav.Link eventKey="first">Completed Projects</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="second">Currently Working</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="third">Future Pipeline</Nav.Link>
-                    </Nav.Item>
-                  </Nav>
-                  <Tab.Content id="slideInUp" className={isVisible ? "animate__animated animate__slideInUp" : ""}>
-                    <Tab.Pane eventKey="first">
-                      <Row>
-                        {projects.map((project, index) => (
-                          <ProjectCard key={index} {...project} />
-                        ))}
-                      </Row>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="second">
-                      <p>I am currently dedicating my efforts to the development of these projects.</p>
-                      <Row lg = {3}>
-                        {projectsCurrent.map((project, index) => (
-                            <ProjectCard {...project} />
-                        ))}
-                      </Row>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="third">
-                      <p>Here are the Projects I am Planning on working on sometime in the future. Contact me if you want to collaborate.</p>
-                      <Row>
-                        {projectsFuture.map((project, index) => (
-                          <ProjectCard key={index} {...project} />
-                        ))}
-                      </Row>
-                    </Tab.Pane>
-                  </Tab.Content>
-                </Tab.Container>
-                <div className="moreproj">
-                <button onClick={() => { handleButtonClick() }}>
-                  More Projects 
-                  <ArrowRightCircle size={25} />
-                </button>
-                </div>
+        <Reveal className="section-head">
+          <span className="eyebrow">Projects</span>
+          <h2>Things I've built</h2>
+          <p>From healthcare apps and mixed reality to computer vision research.</p>
+        </Reveal>
 
-              <style>
-                {`
-                  .moreproj {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin-top: 20px;
-                  }
+        <div className="text-center">
+          <div className="segmented" role="tablist">
+            {TABS.map((t) => (
+              <button
+                key={t.key}
+                type="button"
+                role="tab"
+                aria-selected={tab === t.key}
+                className={tab === t.key ? "is-active" : ""}
+                onClick={() => setTab(t.key)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                  .moreproj button {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 1.2rem;
-                    padding: 10px 20px;
-                    border: none;
-                    border-radius: 25px;
-                    cursor: pointer;
-                    overflow: hidden;
-                    position: relative;
-                    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
-                  }
+        <div className="project-grid">
+          {visible.map((project) => (
+            <ProjectCard key={project.id} project={project} onOpen={setSelected} />
+          ))}
+        </div>
 
-                  .moreproj button:hover {
-                    transform: scale(1.05);
-                  }
-
-                  .moreproj button span {
-                    display: inline-block;
-                    opacity: 0;
-                    transform: translateY(20px);
-                    animation: waveAppear 0.5s ease-out forwards;
-                  }
-
-                  @keyframes waveAppear {
-                    0% {
-                      opacity: 0;
-                      transform: translateY(20px);
-                    }
-                    100% {
-                      opacity: 1;
-                      transform: translateY(0);
-                    }
-                  }
-                `}
-              </style>
-              </div>
-              )}
-            </TrackVisibility>
-          </Col>
-        </Row>
+        <div className="projects-footer">
+          <Link to="/projects" className="button button--ghost">
+            See all {projects.length} projects <ArrowRight size={16} />
+          </Link>
+          <p>
+            Next on my list: {planned.map((p) => p.title).join(", ")}.{" "}
+            <HashLink smooth to="/#connect" className="inline-link">Want to collaborate?</HashLink>
+          </p>
+        </div>
       </Container>
-      <img className="background-image-right" src={colorSharp2} alt="background" />
+      <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   );
 };

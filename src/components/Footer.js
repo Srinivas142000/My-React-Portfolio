@@ -1,59 +1,22 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import gitImage from "../assets/img/github.png";
-import linkImage from "../assets/img/nav-icon1.svg";
+import { Container } from "react-bootstrap";
+import { Envelope, Github, Linkedin } from "react-bootstrap-icons";
+import { links } from "../data/profile";
 
-export const Footer = () => {
-  // State to store visit count
-  const [visitCount, setVisitCount] = useState(0);
-
-  // Track and update site visit count
-  useEffect(() => {
-    // Get visit count from localStorage
-    let count = localStorage.getItem("siteVisitCount");
-    if (count === null) {
-      // Initialize if not present
-      localStorage.setItem("siteVisitCount", 1);
-      setVisitCount(1);
-    } else {
-      // Increment and update
-      let newCount = parseInt(count) + 1;
-      localStorage.setItem("siteVisitCount", newCount);
-      setVisitCount(newCount);
-    }
-  }, []);
-
-  return (
-    <footer className="footer">
-      <Container>
-        <Row className="align-items-center">
-          <Col size={12} sm={6}>
-            <p>
-              &copy; {new Date().getFullYear()} Yoga Kasireddy. All Rights
-              Reserved.
-            </p>
-            <p>👀 <strong>{visitCount}</strong> </p>
-          </Col>
-          <Col size={12} sm={6} className="text-center text-sm-end">
-            <div className="social-icon">
-              <a
-                href="https://www.linkedin.com/in/yoga-srinivas-reddy-kasireddy-38b8151a0/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={linkImage} alt="LinkedIn" />
-              </a>
-              <a
-                href="https://github.com/Srinivas142000"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img src={gitImage} alt="GitHub" />
-              </a>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </footer>
-  );
-};
+export const Footer = () => (
+  <footer className="footer">
+    <Container className="footer-inner">
+      <p>&copy; {new Date().getFullYear()} Yoga Kasireddy</p>
+      <div className="footer-social">
+        <a className="icon-button" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <Linkedin size={16} />
+        </a>
+        <a className="icon-button" href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <Github size={16} />
+        </a>
+        <a className="icon-button" href={`mailto:${links.email}`} aria-label="Email">
+          <Envelope size={16} />
+        </a>
+      </div>
+    </Container>
+  </footer>
+);
