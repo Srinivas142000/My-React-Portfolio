@@ -12,10 +12,13 @@
   --muted: #a1a1ad;
   --subtle: #6e6e7a;
 
-  --accent: #8b5cf6;
-  --accent-2: #d946ef;
-  --accent-soft: rgba(139, 92, 246, 0.14);
-  --grad: linear-gradient(90deg, var(--accent), var(--accent-2));
+  /* Brand: Yoga's original pink -> purple gradient */
+  --pink: #AA367C;
+  --violet: #4A2FBD;
+  --accent: #b45cf0;
+  --accent-soft: rgba(180, 92, 240, 0.16);
+  --grad: linear-gradient(90.21deg, var(--pink) -5.91%, var(--violet) 111.58%);
+  --grad-bright: linear-gradient(90deg, #ff5fc8, #b45cf0, #6d7dff, #00CED1, #ff5fc8);
 
   --radius-sm: 8px;
   --radius: 14px;

@@ -34,7 +34,7 @@ export const Contact = () => {
   };
 
   return (
-    <section className="section" id="connect">
+    <section className="section contact-section" id="connect">
       <Container>
         <Reveal className="contact-card">
           <Row>

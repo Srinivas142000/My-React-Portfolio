@@ -5,7 +5,16 @@ export const links = {
   resume: "https://drive.google.com/file/d/17Wcf02A2cashal6m9t_7lvViUZo1cArK/view?usp=drive_link",
 };
 
-export const roles = ["Software Engineer", "Tech Enthusiast", "Avid Reader", "Forever Curious"];
+// Each role types out in its own color
+export const roles = [
+  { text: "Tech Enthusiast", color: "#FF6347" },
+  { text: "Avid Reader", color: "#FFD700" },
+  { text: "Software Engineer", color: "#32CD32" },
+  { text: "Student", color: "#00CED1" },
+  { text: "Geek", color: "#FF1493" },
+  { text: "Software Developer", color: "#B266FF" },
+  { text: "Forever Curious", color: "#00FA9A" },
+];
 
 export const skillGroups = [
   {

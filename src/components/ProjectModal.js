@@ -1,5 +1,6 @@
 import { Modal } from "react-bootstrap";
 import { BoxArrowUpRight, Github, X } from "react-bootstrap-icons";
+import { ProjectVisual } from "./ProjectVisual";
 import { STATUS_LABELS } from "../data/projects";
 
 const LINK_LABELS = { github: "Source code", demo: "Live demo", paper: "Paper" };
@@ -9,7 +10,7 @@ export const ProjectModal = ({ project, onClose }) => (
     {project && (
       <>
         <div className="project-modal__media">
-          <img src={project.image} alt="" />
+          <ProjectVisual type={project.visual} colors={project.colors} />
         </div>
         <button type="button" className="icon-button project-modal__close" onClick={onClose} aria-label="Close">
           <X size={22} />

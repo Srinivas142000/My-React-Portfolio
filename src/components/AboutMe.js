@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Award, Briefcase, Mortarboard, PatchCheck, Trophy } from "react-bootstrap-icons";
-import { Reveal } from "./Reveal";
+import { Reveal, useInView } from "./Reveal";
+import { trackPointer } from "./Effects";
 import { Timeline } from "./Timeline";
 import { stats } from "../data/profile";
 
@@ -12,12 +14,40 @@ const STAT_ICONS = {
   mortarboard: Mortarboard,
 };
 
+// Counts from 0 up to the number in `value` (keeping any suffix like "+") once visible
+const CountUp = ({ value }) => {
+  const target = parseInt(value, 10);
+  const suffix = value.replace(String(target), "");
+  const [ref, inView] = useInView(0.4);
+  const [n, setN] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setN(target);
+      return;
+    }
+    const duration = 1200;
+    const start = performance.now();
+    let frame;
+    const tick = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      setN(Math.round(target * (1 - Math.pow(1 - t, 3))));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [inView, target]);
+
+  return <strong ref={ref}>{n}{suffix}</strong>;
+};
+
 export const AboutMe = () => (
   <main className="page">
     <Container>
       <div className="about-intro">
         <span className="eyebrow">About me</span>
-        <h1>Engineer by trade, curious by default.</h1>
+        <h1>Engineer by trade, <span className="name-gradient">curious by default.</span></h1>
         <p>
           I'm a results-driven software engineer pursuing a Master's in Computer Science at
           Northeastern University. As a Development Engineer at Comcast, I developed algorithms
@@ -40,9 +70,9 @@ export const AboutMe = () => (
         {stats.map(({ value, label, icon }) => {
           const Icon = STAT_ICONS[icon];
           return (
-            <div className="stat" key={label}>
+            <div className="stat spotlight" key={label} onMouseMove={trackPointer}>
               <Icon size={22} />
-              <strong>{value}</strong>
+              <CountUp value={value} />
               <span>{label}</span>
             </div>
           );

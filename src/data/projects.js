@@ -1,25 +1,7 @@
-import medrhythms from "../assets/img/projects/medrhy.webp";
-import spiderweb from "../assets/img/projects/projspweb.webp";
-import survivor from "../assets/img/projects/survivor.webp";
-import voiceToText from "../assets/img/projects/vtotxt.webp";
-import arNavigation from "../assets/img/projects/ar.webp";
-import drowsiness from "../assets/img/projects/ddrow.webp";
-import networks from "../assets/img/projects/compnetw.webp";
-import cybersecurity from "../assets/img/projects/codecyb.webp";
-import mrInterior from "../assets/img/projects/mrimage.webp";
-import worldquant from "../assets/img/projects/worldquant.webp";
-import hazeRemoval from "../assets/img/projects/paper1.webp";
-import reflectance from "../assets/img/projects/paper2.webp";
-import evAnalysis from "../assets/img/projects/dataviz.webp";
-import adview from "../assets/img/projects/defprojpic.webp";
-import imageConv3d from "../assets/img/projects/imgconv.webp";
-import objectTo3d from "../assets/img/projects/arml.webp";
-import traumaBot from "../assets/img/projects/traumabot.webp";
-import scamShield from "../assets/img/projects/scamshield.webp";
-
 // Single source of truth for every project shown on the site.
 // status: "completed" | "in-progress" | "planned"
 // featured: shown on the home page
+// visual: animated cover scene (see components/ProjectVisual.js), colors: its two accent colors
 // links: optional { github, demo, paper } URLs, rendered as buttons in the details modal
 export const STATUS_LABELS = {
   completed: "Completed",
@@ -32,7 +14,8 @@ export const projects = [
     id: "medrhythms",
     title: "MedRhythms App",
     summary: "Music-therapy mobile app that tracks progress for patients with neurological disorders.",
-    image: medrhythms,
+    visual: "pulse",
+    colors: ["#ff5fc8", "#2dd4bf"],
     status: "completed",
     featured: true,
     tech: ["Flutter", "Firebase", "Spotify SDK", "Google Health API", "Healthcare"],
@@ -44,7 +27,8 @@ export const projects = [
     id: "mr-interior",
     title: "Meta Quest 3 MR Interior Design",
     summary: "Mixed-reality app to build virtual walls and try out textures and colors in real time.",
-    image: mrInterior,
+    visual: "room",
+    colors: ["#b45cf0", "#38bdf8"],
     status: "completed",
     featured: true,
     tech: ["Unity", "C#", "Meta Quest 3 SDK", "Mixed Reality", "3D Modeling"],
@@ -56,7 +40,8 @@ export const projects = [
     id: "spiderweb",
     title: "SpiderWeb: Events & Communities",
     summary: "Social platform for student communities and events with a JIRA-style collaboration board.",
-    image: spiderweb,
+    visual: "web",
+    colors: ["#f472b6", "#a78bfa"],
     status: "completed",
     featured: true,
     tech: ["Spring Boot", "React", "PostgreSQL"],
@@ -68,7 +53,8 @@ export const projects = [
     id: "voice-forms",
     title: "Voice-to-Text Form Assistant",
     summary: "Accessibility tool that lets users fill out online forms entirely by voice.",
-    image: voiceToText,
+    visual: "voice",
+    colors: ["#22d3ee", "#a855f7"],
     status: "completed",
     featured: true,
     tech: ["Python", "Vosk API", "MongoDB", "REST APIs"],
@@ -80,7 +66,8 @@ export const projects = [
     id: "ar-navigation",
     title: "Network Element Navigation with AR",
     summary: "iOS AR app that overlays ArcGIS geospatial data to locate network elements in the field.",
-    image: arNavigation,
+    visual: "map",
+    colors: ["#f97316", "#6366f1"],
     status: "completed",
     featured: true,
     tech: ["Xamarin", "ARKit", "ArcGIS", "Blender", "iOS SDK"],
@@ -92,7 +79,8 @@ export const projects = [
     id: "drowsiness",
     title: "Driver Drowsiness Detection",
     summary: "Real-time CNN that raises an alarm when a driver's eyes close or they yawn repeatedly.",
-    image: drowsiness,
+    visual: "eye",
+    colors: ["#facc15", "#ef4444"],
     status: "completed",
     featured: true,
     tech: ["Python", "TensorFlow", "OpenCV", "VGG16"],
@@ -104,7 +92,8 @@ export const projects = [
     id: "survivor",
     title: "Survivor, the Game",
     summary: "Story-driven text adventure in Java with a custom command parser and MVC architecture.",
-    image: survivor,
+    visual: "terminal",
+    colors: ["#4ade80", "#f59e0b"],
     status: "completed",
     tech: ["Java", "MVC"],
     details:
@@ -115,7 +104,8 @@ export const projects = [
     id: "chatrooms",
     title: "Client-Server vs Peer-to-Peer Chatrooms",
     summary: "Performance comparison of two network architectures through real-time chat apps.",
-    image: networks,
+    visual: "topology",
+    colors: ["#38bdf8", "#e879f9"],
     status: "completed",
     tech: ["Python", "WebSocket", "TCP/IP", "HTTP", "P2P Networking"],
     details:
@@ -126,7 +116,8 @@ export const projects = [
     id: "adview",
     title: "YouTube Adview Prediction",
     summary: "ML models predicting ad views from ~15,000 YouTube videos' engagement metrics.",
-    image: adview,
+    visual: "chart",
+    colors: ["#ef4444", "#f97316"],
     status: "completed",
     tech: ["Python", "Machine Learning", "NumPy", "Pandas", "Matplotlib"],
     details:
@@ -137,7 +128,8 @@ export const projects = [
     id: "codepath-cyber",
     title: "CodePath Cybersecurity",
     summary: "Hands-on ethical hacking, penetration testing, and defensive security projects.",
-    image: cybersecurity,
+    visual: "lock",
+    colors: ["#22c55e", "#14b8a6"],
     status: "completed",
     tech: ["Cybersecurity", "Penetration Testing", "Linux", "Python"],
     details:
@@ -148,7 +140,8 @@ export const projects = [
     id: "ev-analysis",
     title: "Washington EV Population Analysis",
     summary: "Geospatial and trend analysis of every electric vehicle registered in Washington State.",
-    image: evAnalysis,
+    visual: "geo",
+    colors: ["#34d399", "#60a5fa"],
     status: "in-progress",
     tech: ["Python", "Pandas", "SQL", "Seaborn", "Geospatial Analysis"],
     details:
@@ -159,7 +152,8 @@ export const projects = [
     id: "reflectance",
     title: "Data-Driven Reflectance Priors",
     summary: "Learning a reflectance prior from human annotations to split images into reflectance and shading.",
-    image: reflectance,
+    visual: "layers",
+    colors: ["#f472b6", "#8b5cf6"],
     status: "in-progress",
     tech: ["Python", "Caffe", "Deep Learning", "Computer Vision"],
     details:
@@ -170,7 +164,8 @@ export const projects = [
     id: "haze-removal",
     title: "Single Image Haze Removal",
     summary: "Dehazing images with a color attenuation prior and a learned linear depth model.",
-    image: hazeRemoval,
+    visual: "dehaze",
+    colors: ["#f9a8d4", "#6366f1"],
     status: "in-progress",
     tech: ["Python", "C++", "Computer Vision", "Image Processing"],
     details:
@@ -181,7 +176,8 @@ export const projects = [
     id: "worldquant-ai",
     title: "WorldQuant Applied AI Lab",
     summary: "Six real-world deep learning and computer vision projects.",
-    image: worldquant,
+    visual: "neural",
+    colors: ["#c084fc", "#22d3ee"],
     status: "in-progress",
     tech: ["Python", "Deep Learning", "Computer Vision"],
     details:
@@ -192,7 +188,8 @@ export const projects = [
     id: "image-conv3d",
     title: "Image Conv3D",
     summary: "Converting 2D images into interactive 3D models for AR.",
-    image: imageConv3d,
+    visual: "cube",
+    colors: ["#fb7185", "#818cf8"],
     status: "planned",
     tech: ["ARKit", "Unity", "Computer Vision", "3D Modeling"],
     details:
@@ -203,7 +200,8 @@ export const projects = [
     id: "object-to-3d",
     title: "Real-Time Object to 3D",
     summary: "Detecting objects live and turning them into 3D representations.",
-    image: objectTo3d,
+    visual: "cube",
+    colors: ["#2dd4bf", "#f472b6"],
     status: "planned",
     tech: ["Python", "TensorFlow", "OpenCV", "3D Modeling"],
     details:
@@ -214,7 +212,8 @@ export const projects = [
     id: "trauma-bot",
     title: "Trauma Bot",
     summary: "An empathetic AI chatbot offering immediate support during emotional distress.",
-    image: traumaBot,
+    visual: "chat",
+    colors: ["#a855f7", "#f9a8d4"],
     status: "planned",
     tech: ["Python", "GPT-3", "NLP", "Flask"],
     details:
@@ -225,7 +224,8 @@ export const projects = [
     id: "scam-shield",
     title: "Scam Shield",
     summary: "Mobile app that flags scam messages, calls, and phishing attempts.",
-    image: scamShield,
+    visual: "shield",
+    colors: ["#6366f1", "#22d3ee"],
     status: "planned",
     tech: ["React Native", "Firebase", "JavaScript"],
     details:

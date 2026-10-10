@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 import { Github, Linkedin } from "react-bootstrap-icons";
 import { links } from "../data/profile";
+import logo from "../assets/img/logo-wordmark.svg";
 
 export const NavBar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -33,8 +34,7 @@ export const NavBar = () => {
     >
       <Container>
         <Navbar.Brand as={Link} to="/" className="brand" onClick={close}>
-          <span className="brand-mark">YK</span>
-          Yoga Kasireddy
+          <img src={logo} alt="Yoga Kasireddy" className="brand-logo" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-nav" />
         <Navbar.Collapse id="main-nav">

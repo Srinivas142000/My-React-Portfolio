@@ -9,6 +9,7 @@ import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
 import { SearchPage } from "./components/SearchPage";
 import { AboutMe } from "./components/AboutMe";
+import { CursorGlow, ScrollProgress } from "./components/Effects";
 
 function Home() {
   return (
@@ -34,6 +35,8 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <ScrollProgress />
+      <CursorGlow />
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
